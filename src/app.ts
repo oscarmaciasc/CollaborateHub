@@ -1,17 +1,23 @@
 import express from 'express'
-import mongoose, { type ConnectOptions } from 'mongoose'
-import { logErrors, errorHandler, boomErrorHandler } from './middlewares/error.handler'
+import mongoose from 'mongoose'
+import { 
+  logErrors,
+  errorHandler,
+  boomErrorHandler
+} from './middlewares/error.handler'
+import { config } from './config/config'
 
-const MONGO_URI = 'mongodb://localhost:27017/collaboratehub'
+const { port, mongoUri, env } = config
+console.log('URI: ' + mongoUri)
+console.log('ENV: ' + env)
 
 const app = express()
-const port = 3011
+app.use(express.json())
 
 const connectDB = () => {
-  mongoose.connect(MONGO_URI)
+  mongoose.connect(mongoUri)
 }
 
-app.use(express.json())
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`)
