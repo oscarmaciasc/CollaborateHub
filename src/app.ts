@@ -12,9 +12,6 @@ const connectDB = () => {
 }
 
 app.use(express.json())
-app.use(logErrors)
-app.use(errorHandler)
-app.use(boomErrorHandler)
 
 app.get('/', (req, res) => {
   res.send('Hello World')
@@ -24,3 +21,7 @@ app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`)
   connectDB()
 })
+
+app.use(logErrors)
+app.use(boomErrorHandler)
+app.use(errorHandler)
