@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose, { type ConnectOptions } from 'mongoose'
 
-const MONGO_URI = 'mongodb://mongo:27017/collaboratehub'
+const MONGO_URI = 'mongodb://localhost:27017/collaboratehub'
 
 const app = express()
 const port = 3011
@@ -11,7 +11,7 @@ const connectDB = () => {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.send('Hello Worlddd')
 })
 
 app.listen(port, () => {
