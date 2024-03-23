@@ -24,6 +24,7 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "express": "^4.19.1",
     "mongoose": "^8.2.3"
   }
