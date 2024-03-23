@@ -5,6 +5,7 @@ export type User = {
     username: string,
     email: string,
     password: string,
+    phoneNumber: string,
     profile: {
         firstName: string,
         lastName: string,

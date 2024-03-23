@@ -1,5 +1,6 @@
 import {Schema, model} from 'mongoose'
 import {User, UserModel} from '../types/user.type'
+import { EMAIL_REGEX, PHONE_NUMBER_REGEX } from '../utils/constants'
 
 export const USER_REFERENCE = 'User'
 
@@ -16,11 +17,18 @@ const Users = new Schema<User, UserModel>({
         required: true,
         unique: true,
         trim: true,
-        index: true
+        index: true,
+        match: [EMAIL_REGEX, 'Please enter a valid email']
     },
     password: {
         type: String,
         required: true
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+        trim: true,
+        match: [PHONE_NUMBER_REGEX, 'Please enter a valid phone number']
     },
     profile: {
         firstName: {
