@@ -4,15 +4,19 @@ import {Group, GroupModel} from '../types/group.type'
 const Models = new Schema<Group, GroupModel>({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        index: true
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     creator_id: {
         type: Types.ObjectId,
-        required: true
+        required: true,
+        unique: true
     },
     members: [{
         type: Types.ObjectId,
@@ -24,7 +28,8 @@ const Models = new Schema<Group, GroupModel>({
     }],
     created_at: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        index: true
     },
     updated_at: {
         type: Date,
