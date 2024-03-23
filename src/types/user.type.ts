@@ -1,7 +1,7 @@
 import type { Model, ObjectId } from 'mongoose'
 
 export type User = {
-    id: ObjectId,
+    id?: ObjectId,
     username: String,
     email: String,
     password: String,
@@ -11,8 +11,8 @@ export type User = {
         avatar?: String,
         bio?: String,
     },
-    created_at: Date,
-    updated_at: Date
+    created_at?: Date,
+    updated_at?: Date
 }
 
 export type UserModel = Model<User>
