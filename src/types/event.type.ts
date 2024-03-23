@@ -1,14 +1,14 @@
-import type {Model, ObjectId} from 'mongoose'
+import type {Model} from 'mongoose'
 
 export type Event = {
-    id?: ObjectId,
-    group_id: ObjectId,
-    title: String,
-    description: String,
-    location: String,
+    id?: string,
+    group_id: string,
+    title: string,
+    description: string,
+    location: string,
     date: Date,
-    organizer_id: ObjectId,
-    attendees?: [ObjectId],
+    organizer_id: string,
+    attendees?: [string],
     created_at?: Date,
     updated_at?: Date
 }

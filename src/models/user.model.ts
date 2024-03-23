@@ -1,6 +1,8 @@
 import {Schema, model} from 'mongoose'
 import {User, UserModel} from '../types/user.type'
 
+export const USER_REFERENCE = 'User'
+
 const Users = new Schema<User, UserModel>({
     username: {
         type: String,
@@ -51,4 +53,4 @@ const Users = new Schema<User, UserModel>({
     }
 })
 
-export default model('User', Users)
+export default model(USER_REFERENCE, Users)

@@ -1,14 +1,16 @@
 import {Schema, model, Types} from 'mongoose'
 import {Message, MessageModel} from '../types/message.type'
 
+export const MESSAGE_REFERENCE = 'Message'
+
 const Messages = new Schema<Message, MessageModel>({
     group_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         index: true
     },
     sender_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         index: true
     },
@@ -22,4 +24,4 @@ const Messages = new Schema<Message, MessageModel>({
     }
 })
 
-export default model('Message', Messages)
+export default model(MESSAGE_REFERENCE, Messages)

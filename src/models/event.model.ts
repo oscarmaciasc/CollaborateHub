@@ -1,9 +1,12 @@
-import {Schema, model, Types} from 'mongoose'
+import {Schema, model} from 'mongoose'
 import {Event, EventModel} from '../types/event.type'
+import { USER_REFERENCE } from './user.model'
+
+export const EVENT_REFERENCE = 'Event'
 
 const Events = new Schema<Event, EventModel>({
     group_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         index: true
     },
@@ -30,13 +33,13 @@ const Events = new Schema<Event, EventModel>({
         index: true
     },
     organizer_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         index: true
     },
     attendees: [{
-        type: Types.ObjectId,
-        ref: 'User',
+        type: String,
+        ref: USER_REFERENCE,
         index: true
     }],
     created_at: {
@@ -50,4 +53,4 @@ const Events = new Schema<Event, EventModel>({
     }
 })
 
-export default model('Event', Events)
+export default model(EVENT_REFERENCE, Events)

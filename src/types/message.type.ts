@@ -1,10 +1,10 @@
-import type {Model, ObjectId} from 'mongoose'
+import type {Model} from 'mongoose'
 
 export type Message = {
-    id?: ObjectId,
-    group_id: ObjectId, // Reference to the group associated with the message 
-    sender_id: ObjectId, // Reference to the user sending the message
-    content: String,
+    id?: string,
+    group_id: string, // Reference to the group associated with the message 
+    sender_id: string, // Reference to the user sending the message
+    content: string,
     timestamp: Date
 }
 

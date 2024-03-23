@@ -1,15 +1,15 @@
-import type { Model, ObjectId } from 'mongoose'
+import type { Model } from 'mongoose'
 
 export type User = {
-    id?: ObjectId,
-    username: String,
-    email: String,
-    password: String,
+    id?: string,
+    username: string,
+    email: string,
+    password: string,
     profile: {
-        firstName: String,
-        lastName: String,
-        avatar?: String,
-        bio?: String,
+        firstName: string,
+        lastName: string,
+        avatar?: string,
+        bio?: string,
     },
     created_at?: Date,
     updated_at?: Date

@@ -1,12 +1,12 @@
-import type {Model, ObjectId} from 'mongoose'
+import type {Model} from 'mongoose'
 
 export type Group = {
-    id?: ObjectId,
-    name: String,
-    description: String,
-    creator_id: ObjectId,
-    members?: [ObjectId],
-    moderators?: [ObjectId],
+    id?: string,
+    name: string,
+    description: string,
+    creator_id: string,
+    members?: [string],
+    moderators?: [string],
     created_at?: Date,
     updated_at?: Date
 }

@@ -1,7 +1,10 @@
 import {Schema, Model, model, Types} from 'mongoose'
 import {Group, GroupModel} from '../types/group.type'
+import { USER_REFERENCE } from './user.model'
 
-const Models = new Schema<Group, GroupModel>({
+export const GROUP_REFERENCE = 'Group'
+
+const Groups = new Schema<Group, GroupModel>({
     name: {
         type: String,
         required: true,
@@ -14,17 +17,17 @@ const Models = new Schema<Group, GroupModel>({
         trim: true
     },
     creator_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         unique: true
     },
     members: [{
-        type: Types.ObjectId,
-        ref: 'User'
+        type: String,
+        ref: USER_REFERENCE
     }],
     moderators: [{
-        type: Types.ObjectId,
-        ref: 'User'
+        type: String,
+        ref: USER_REFERENCE
     }],
     created_at: {
         type: Date,
@@ -37,4 +40,4 @@ const Models = new Schema<Group, GroupModel>({
     }
 })
 
-export default model('Model', Models)
+export default model(GROUP_REFERENCE, Groups)

@@ -1,9 +1,12 @@
 import {Schema, model, Types} from 'mongoose'
 import {Task, TaskModel} from '../types/task.type'
+import { USER_REFERENCE } from './user.model'
+
+export const TASK_REFERENCE = 'Task'
 
 const Tasks = new Schema<Task, TaskModel>({
     group_id: {
-        type: Types.ObjectId,
+        type: String,
         required: true,
         index: true
     },
@@ -28,8 +31,8 @@ const Tasks = new Schema<Task, TaskModel>({
         index: true
     },
     assigned_to: [{
-        type: Types.ObjectId,
-        ref: 'User',
+        type: String,
+        ref: USER_REFERENCE,
         index: true
     }],
     created_at: {
@@ -43,4 +46,4 @@ const Tasks = new Schema<Task, TaskModel>({
     }
 })
 
-export default model('Task', Tasks)
+export default model(TASK_REFERENCE, Tasks)
