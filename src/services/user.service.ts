@@ -16,9 +16,6 @@ class UserService {
     if(!newUser) {
         throw boom.badRequest('Could not create user')
     }
-
-    newUser.password = undefined
-
     return newUser
   }
   
@@ -31,8 +28,6 @@ class UserService {
             throw boom.notFound('User not found')
         }
 
-        user.password = undefined
-        
         return user
     }
 
