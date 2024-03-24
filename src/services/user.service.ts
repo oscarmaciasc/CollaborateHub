@@ -1,5 +1,5 @@
 import Users from '../models/user.model'
-import { User } from '../types/user.type'
+import { User, UserModel } from '../types/user.type'
 import boom from '@hapi/boom'
 import bcrypt from 'bcrypt'
 
@@ -17,6 +17,8 @@ class UserService {
         throw boom.badRequest('Could not create user')
     }
 
+    newUser.password = undefined
+
     return newUser
   }
   
@@ -28,6 +30,8 @@ class UserService {
         if (!user) {
             throw boom.notFound('User not found')
         }
+
+        user.password = undefined
         
         return user
     }
