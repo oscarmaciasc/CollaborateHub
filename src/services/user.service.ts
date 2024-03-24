@@ -3,35 +3,61 @@ import { User, UserModel } from '../types/user.type'
 import boom from '@hapi/boom'
 
 class UserService {
-    async create(user: User) {
-        const newUser = await Users.create(user).catch((error) => {
-            console.log('Could not save user', error)
-        })
+  async create(user: User) {
+    const newUser = await Users.create(user).catch((error) => {
+      console.log('Could not save user', error)
+    })
 
-        return newUser
+    return newUser
+  }
+
+  async findAll() {
+    const users = await Users.find().catch((error) => {
+      console.log('Error while connecting to the DB', error)
+    })
+
+    if (!users) {
+      throw boom.notFound('There are not movies')
     }
 
-    async findAll() {
-        const users = await Users.find().catch((error) => {
-            console.log('Error while connecting to the DB', error)
-        })
+    return users
+  }
 
-        if(!users) {
-            throw boom.notFound('There are not users')
-        }
+  async findById(id: string) {
+    const user = await Users.findById({ id }).catch((error) => {
+        console.log('Could not retrieve user info', error)
+    })
 
-        return users
+    if(!user) {
+      throw boom.notFound('User not found')
     }
 
-    async findByUsername(username: string) {
-        const user = await Users.find({username}).catch((error) => {
-            console.log('Could not retrieve user info', error)
-        })
+    return user
+  }
 
-        if(!user) {
-            throw boom.notFound('User not found')
-        }
+  async findByUsername(username: string) {
+    const user = await Users.findOne({ username }).catch((error) => {
+      console.log('Could not retrieve user info', error)
+    })
+
+    if (!user) {
+      throw boom.notFound('User not found')
     }
+
+    return user
+  }
+
+  async findByEmail(email: string) {
+    const user = await Users.findOne({ email }).catch((error) => {
+      console.log('Could not retreive user info', error)
+    })
+
+    if (!user) {
+      throw boom.notFound('User not found')
+    }
+
+    return user
+  }
 }
 
 export default UserService

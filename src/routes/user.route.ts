@@ -19,24 +19,15 @@ router.post('/', async (req, res, next) => {
 })
 
 router.get('/', async (req, res, next) => {
-  try {
-      const users = await service.findAll()
-      res.status(200).json(users)
-  } catch (error) {
-      next(error)
-  }
-})
-
-// router.get('/:username', async (req, res, next) => {
-//     try {
-//       const { username } = req.query
-//       const user = await service.findByUsername(username as string)
-//       console.log({ user })
+    try {
+      const { username } = req.query
+      const user = await service.findByUsername(username as string)
+      console.log({ user })
   
-//       res.status(200).json({ user })
-//     } catch (error) {
-//       next(error)
-//     }
-//   })
+      res.status(200).json({ user })
+    } catch (error) {
+      next(error)
+    }
+  })
 
 export default router
