@@ -7,10 +7,10 @@ import {
 } from './middlewares/error.handler'
 import { config } from './config/config'
 import routerApi from './routes'
+import passport from 'passport'
+import './utils/auth'
 
 const { port, mongoUri, env } = config
-console.log('URI: ' + mongoUri)
-console.log('ENV: ' + env)
 
 const app = express()
 app.use(express.json())
@@ -19,6 +19,7 @@ const connectDB = () => {
   mongoose.connect(mongoUri)
 }
 
+app.use(passport.initialize())
 routerApi(app)
 
 app.listen(port, () => {
