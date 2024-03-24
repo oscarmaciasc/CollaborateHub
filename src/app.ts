@@ -6,6 +6,7 @@ import {
   boomErrorHandler
 } from './middlewares/error.handler'
 import { config } from './config/config'
+import routerApi from './routes'
 
 const { port, mongoUri, env } = config
 console.log('URI: ' + mongoUri)
@@ -18,6 +19,7 @@ const connectDB = () => {
   mongoose.connect(mongoUri)
 }
 
+routerApi(app)
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`)

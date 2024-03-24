@@ -26,7 +26,6 @@ const Users = new Schema<User, UserModel>({
     },
     phoneNumber: {
         type: String,
-        required: true,
         trim: true,
         match: [PHONE_NUMBER_REGEX, 'Please enter a valid phone number']
     },
