@@ -16,10 +16,9 @@ const Groups = new Schema<Group, GroupModel>({
         required: true,
         trim: true
     },
-    creator_id: {
-        type: String,
-        required: true,
-        unique: true
+    creator: {
+        type: Schema.Types.ObjectId,
+        required: true
     },
     members: [{
         type: String,

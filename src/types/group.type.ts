@@ -1,10 +1,11 @@
 import type {Model} from 'mongoose'
+import { User } from './user.type'
 
 export type Group = {
     id?: string,
     name: string,
     description: string,
-    creator_id: string,
+    creator: User,
     members?: [string],
     moderators?: [string],
     created_at?: Date,
