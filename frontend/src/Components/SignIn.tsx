@@ -14,24 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="http://localhost:5173/landing">
-        CollaborateHub
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Copyright from "./Copyright";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
