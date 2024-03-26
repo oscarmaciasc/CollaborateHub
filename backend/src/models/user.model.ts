@@ -49,6 +49,9 @@ const Users = new Schema<User, UserModel, UserMethods>({
             trim: true
         }
     },
+    receiveEmails: {
+        type: Boolean
+    },
     created_at: {
         type: Date,
         default: Date.now,

@@ -7,8 +7,15 @@ class UserService {
   async create(user: User) {
     const hashedPassword = await bcrypt.hash(user.password, 10)
     const newUser = await Users.create({
-        ...user,
-        password: hashedPassword
+        username: user.username,
+        email: user.email,
+        password: hashedPassword,
+        phoneNumber: user.phoneNumber,
+        receiveEmails: user.receiveEmails,
+        profile: {
+          firstName: user.profile.firstName,
+          lastName: user.profile.lastName
+        }
     }).catch((error) => {
       console.log('Could not save user', error)
     })

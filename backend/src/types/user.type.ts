@@ -3,7 +3,8 @@ import { Request } from 'express'
 import { ObjectId } from 'mongoose'
 
 export type User = ToClientUser & {
-  password: string
+  password: string,
+  receiveEmails: Boolean,
   created_at?: Date
   updated_at?: Date
 }
