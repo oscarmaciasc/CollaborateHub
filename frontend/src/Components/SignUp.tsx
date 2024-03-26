@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -24,7 +25,7 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="http://localhost:5173/landing">
         CollaborateHub
       </Link>{" "}
       {new Date().getFullYear()}
@@ -36,6 +37,8 @@ function Copyright(props: any) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 export default function SignUp() {
+
+  const navigate = useNavigate();
 
   const [allowExtraEmails, setAllowExtraEmails] = useState(false);
 
@@ -51,8 +54,8 @@ export default function SignUp() {
       receiveEmails: allowExtraEmails,
       profile: {
         firstName: formData.get("firstName"),
-        lastName: formData.get("lastName"),
-      },
+        lastName: formData.get("lastName")
+      }
     };
 
     try {
@@ -62,6 +65,7 @@ export default function SignUp() {
       );
       console.log("User created:", response.data);
       // Redirect user or show success message
+      navigate("/dashboard"); // Redirect to the dashboard page
     } catch (error) {
       console.error("Error creating user:", error);
       // Handle error, show error message, etc.
@@ -173,7 +177,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
