@@ -13,14 +13,43 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Copyright from "./Copyright";
+import Cookies from "universal-cookie";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const [rememberMe, setRememberMe] = useState(false)
+
+  useEffect(() => {
+    const cookies = new Cookies();
+    const token = cookies.get("token");
+    console.log('All: ' + cookies.getAll());
+    console.log('Im getting the token: ' + token);
+    if(token) {
+      autoLogin(token);
+    }
+  }, []);
+
+  const autoLogin = async (token: string) => {
+    try {
+      const response = await axios.get("http://localhost:3011/api/v1/auth/auto-login", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Auto login success: ", response.data);
+      navigate("/dashboard");
+    } catch(error) {
+      console.error("Auto Login error", error);
+      localStorage.removeItem("token");
+    }
+  }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -28,6 +57,7 @@ export default function SignIn() {
     const userData = {
       email: formData.get("email"),
       password: formData.get("password"),
+      rememberMe: rememberMe
     };
 
     try {
@@ -88,7 +118,16 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                checked={rememberMe} 
+                onChange={(event) => 
+                  setRememberMe(event.target.checked)
+                }
+                  value="remember" 
+                  color="primary" 
+                />
+              }
               label="Remember me"
             />
             <Button
