@@ -26,29 +26,34 @@ export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(false)
 
   useEffect(() => {
+    const autoLogin = async (token: String) => {
+      console.log("Attempting auto login...");
+      try {
+        const response = await axios.get("http://localhost:3011/api/v1/auth/auto-login", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+       
+          console.log("Auto login success: ", response.data);
+          navigate("/dashboard");
+      } catch(error) {
+        console.error("Auto Login error", error);
+        navigate("/login");
+      }
+    }
+
     const cookies = new Cookies();
-    const token = cookies.get("token");
-    console.log('All: ' + cookies.getAll());
-    console.log('Im getting the token: ' + token);
+    const token = cookies.get('token');
+    console.log("Retrieved token:", token);
+
     if(token) {
       autoLogin(token);
     }
-  }, []);
-
-  const autoLogin = async (token: string) => {
-    try {
-      const response = await axios.get("http://localhost:3011/api/v1/auth/auto-login", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("Auto login success: ", response.data);
-      navigate("/dashboard");
-    } catch(error) {
-      console.error("Auto Login error", error);
-      localStorage.removeItem("token");
+    else {
+      console.log("No cookie");
     }
-  }
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,8 +67,9 @@ export default function SignIn() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3011/api/v1/auth/login",
-        userData
+        'http://localhost:3011/api/v1/auth/login',
+        userData,
+        { withCredentials: true },
       );
       console.log("User sign-in:", response.data);
       navigate("/dashboard"); // Redirect to the dashboard page

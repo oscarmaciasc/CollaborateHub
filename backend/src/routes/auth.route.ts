@@ -34,10 +34,10 @@ router.post(
       // Set the token as an HTTP-only cookie
       res.cookie('token', token, {
         maxAge: expiresIn,
-        httpOnly: true, // Set as HTTP-only
+        httpOnly: false, // Set as HTTP-only
         secure: false, // Send cookie only over HTTPS if your app is HTTPS
         sameSite: 'lax', // Set appropriate SameSite policy
-        path: '/'
+        path: '/login'
       })
 
       res.status(200).json({ user: dbUser.toClient(), token })
@@ -48,32 +48,30 @@ router.post(
   }
 )
 
-router.get(
-  '/auto-login',
-  passport.authenticate('jwt', { session: false }),
-  async (req: RequestType & User, res, next) => {
+// this path will be used to check if the cookie is valid to auto login inside the application;
+
+router.get('/auto-login', (req, res, next) => {
     try {
-      const { user } = req
-      const dbUser = await service.findByEmail(user.email)
-      if (dbUser) {
-        // If user is found, send user details and token (if needed)
-        const payload = { sub: dbUser.id }
-        const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '1d' }) // Optionally, issue a new token
-        res.cookie('token', token, {
-          maxAge: 24 * 60 * 60 * 1000,
-          httpOnly: true
-        }) // Store token in a cookie with 1 day expiration
-        res.status(200).json({ user: dbUser.toClient(), token })
-      } else {
-        // If user is not found, send an error response
-        res.status(404).json({ message: 'User not found' })
+      const cookie = req.headers.authorization
+
+      if(!cookie||cookie === null) {
+        return res.sendStatus(401)
       }
+
+      return res.sendStatus(200)
+       
     } catch (error) {
-      // If an error occurs, send an error response
-      console.error('Auto login error:', error)
-      res.status(500).json({ message: 'Internal server error' })
+      next(error)
     }
+})
+
+router.get('/logout', (req, res, next) => {
+  try {
+    res.clearCookie('token')
+    return res.sendStatus(200)
+  } catch (error) {
+    next(error)
   }
-)
+})
 
 export default router

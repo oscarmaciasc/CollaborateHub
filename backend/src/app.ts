@@ -9,10 +9,26 @@ import { config } from './config/config'
 import routerApi from './routes'
 import passport from 'passport'
 import './utils/auth'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 const { port, mongoUri, env } = config
 
 const app = express()
+app.use(cookieParser())
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    allowedHeaders: [
+      "set-cookie",
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+      "Access-Control-Allow-Credentials",
+    ],
+  })
+)
 app.use(express.json())
 
 const connectDB = () => {
