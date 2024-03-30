@@ -1,7 +1,15 @@
+import EnrolledGroups from "./Dasboard/EnrolledGroups";
+
 function Dashboard() {
+
+    const userId = "660247b16a4576d58a44d522"
+
     return (
       <>
-        <p>Dashboard</p>
+      <div>
+
+        <EnrolledGroups userId={userId}/>
+      </div>
       </>
     );
   }

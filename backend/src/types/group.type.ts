@@ -6,6 +6,7 @@ export type Group = {
     name: string,
     description: string,
     creator: User,
+    image?: string,
     members?: [string],
     moderators?: [string],
     created_at?: Date,

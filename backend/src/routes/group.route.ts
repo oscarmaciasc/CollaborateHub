@@ -16,7 +16,8 @@ router.post(
       user: { sub }
     } = req
     const group: Group = req.body
-    const newGroup = await service.create(group, sub as unknown as ObjectId)
+    console.log('sub: ' + sub)
+    const newGroup = await service.create(group, sub)
     res.status(201).json({ group: newGroup })
   }
 )
@@ -28,6 +29,17 @@ router.get('/', async (req, res, next) => {
     console.log({ group })
 
     res.status(200).json({ group })
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/findByMember/:userId', async (req, res, next) => {
+  try {
+    const { userId } = req.params
+    console.log(['userId: ' + userId])
+    const groups = await service.findByMember(userId as string)
+    res.status(200).json({ groups })
   } catch (error) {
     next(error)
   }

@@ -27,7 +27,6 @@ export default function SignIn() {
 
   useEffect(() => {
     const autoLogin = async (token: String) => {
-      console.log("Attempting auto login...");
       try {
         const response = await axios.get("http://localhost:3011/api/v1/auth/auto-login", {
           headers: {
@@ -35,7 +34,6 @@ export default function SignIn() {
           },
         });
        
-          console.log("Auto login success: ", response.data);
           navigate("/dashboard");
       } catch(error) {
         console.error("Auto Login error", error);
@@ -45,7 +43,6 @@ export default function SignIn() {
 
     const cookies = new Cookies();
     const token = cookies.get('token');
-    console.log("Retrieved token:", token);
 
     if(token) {
       autoLogin(token);

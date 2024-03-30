@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose'
 import Users from '../models/user.model'
 import { User, UserModel } from '../types/user.type'
 import boom from '@hapi/boom'
@@ -50,17 +51,17 @@ class UserService {
     //     return users
     //   }
     
-    //   async findById(id: string) {
-    //     const user = await Users.findById({ id }).catch((error) => {
-    //         console.log('Could not retrieve user info', error)
-    //     })
+      async findById(id: ObjectId) {
+        const user = await Users.findById(id).catch((error) => {
+            console.log('Could not retrieve user info', error)
+        })
     
-    //     if(!user) {
-    //       throw boom.notFound('User not found')
-    //     }
+        if(!user) {
+          throw boom.notFound('User not found')
+        }
     
-    //     return user
-    //   }
+        return user
+      }
     
     //   async findByUsername(username: string) {
     //     const user = await Users.findOne({ username }).catch((error) => {

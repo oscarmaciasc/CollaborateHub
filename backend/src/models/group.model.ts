@@ -20,6 +20,9 @@ const Groups = new Schema<Group, GroupModel>({
         type: Schema.Types.ObjectId,
         required: true
     },
+    image: {
+        type: String
+    },
     members: [{
         type: String,
         ref: USER_REFERENCE
