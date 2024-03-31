@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import '../Dasboard/EnrolledGroups.css'
 
 const DEFAULT_GROUP_IMAGE: string = '../../src/assets/rocket.jpg'
 
@@ -48,27 +49,29 @@ const EnrolledGroups: React.FC<EnrolledGroupsProp> = ({ userId }) => {
   return (
     <>
     <div>
-      {enrolledGroups.map((group) => (
-        <Card key={group.id} sx={{ maxWidth: 400 }}>
-          <CardMedia
-            component="img"
-            alt={group.name}
-            height="140"
-            image={group.image || DEFAULT_GROUP_IMAGE }
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
-              {group.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {group.description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Enrolle</Button>
-          </CardActions>
-        </Card>
-      ))}
+      <div className="Grid">
+        {enrolledGroups.map((group) => (
+          <Card key={group.id} sx={{ maxWidth: 350, m: 5 }}>
+            <CardMedia
+              component="img"
+              alt={group.name}
+              height="140"
+              image={group.image || DEFAULT_GROUP_IMAGE }
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h6" component="div">
+                {group.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {group.description}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Enrolle</Button>
+            </CardActions>
+          </Card>
+        ))}
+      </div>
     </div>
     </>
   );

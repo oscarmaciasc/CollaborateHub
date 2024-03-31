@@ -1,4 +1,5 @@
 import EnrolledGroups from "./Dasboard/EnrolledGroups";
+import SearchBar from "../Components/SearchBar/SearchBar";
 
 function Dashboard() {
 
@@ -7,7 +8,7 @@ function Dashboard() {
     return (
       <>
       <div>
-
+        <SearchBar/>
         <EnrolledGroups userId={userId}/>
       </div>
       </>
