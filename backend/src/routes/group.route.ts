@@ -34,6 +34,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/findByGroupId/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const group = await service.findById(id as string)
+    console.log({ group })
+
+    res.status(200).json({ group })
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/findByMember/:userId', async (req, res, next) => {
   try {
     const { userId } = req.params

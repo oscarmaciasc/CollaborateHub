@@ -21,34 +21,36 @@ import Cookies from "universal-cookie";
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-
 export default function SignIn() {
   const navigate = useNavigate();
-  const [rememberMe, setRememberMe] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     const autoLogin = async (token: String) => {
       try {
-        const response = await axios.get("http://localhost:3011/api/v1/auth/auto-login", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-       
-          navigate("/dashboard");
-      } catch(error) {
+        const response = await axios.get(
+          "http://localhost:3011/api/v1/auth/auto-login",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log('Status: ' + response.status)
+        if (response.status != 401) navigate("/dashboard");
+      } catch (error) {
         console.error("Auto Login error", error);
         navigate("/login");
       }
-    }
+    };
 
     const cookies = new Cookies();
-    const token = cookies.get('token');
+    const token = cookies.get("token");
 
-    if(token) {
-      autoLogin(token);
-    }
-    else {
+    if (token) {
+      // autoLogin(token);
+    } else {
       console.log("No cookie");
     }
   }, []);
@@ -60,14 +62,14 @@ export default function SignIn() {
     const userData = {
       email: formData.get("email"),
       password: formData.get("password"),
-      rememberMe: rememberMe
+      rememberMe: rememberMe,
     };
 
     try {
       const response = await axios.post(
-        'http://localhost:3011/api/v1/auth/login',
+        "http://localhost:3011/api/v1/auth/login",
         userData,
-        { withCredentials: true },
+        { withCredentials: true }
       );
       console.log("User sign-in:", response.data);
       navigate("/dashboard"); // Redirect to the dashboard page
@@ -124,12 +126,10 @@ export default function SignIn() {
             <FormControlLabel
               control={
                 <Checkbox
-                checked={rememberMe} 
-                onChange={(event) => 
-                  setRememberMe(event.target.checked)
-                }
-                  value="remember" 
-                  color="primary" 
+                  checked={rememberMe}
+                  onChange={(event) => setRememberMe(event.target.checked)}
+                  value="remember"
+                  color="primary"
                 />
               }
               label="Remember me"

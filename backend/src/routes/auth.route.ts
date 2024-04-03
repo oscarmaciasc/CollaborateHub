@@ -41,7 +41,6 @@ router.post(
       })
 
       res.status(200).json({ user: dbUser.toClient(), token })
-      console.log('token duration: ' + expiresIn)
     } catch (error) {
       next(error)
     }

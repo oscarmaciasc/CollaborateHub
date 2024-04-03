@@ -26,6 +26,7 @@ class GroupService {
 
   async findById(id: string) {
     const group = await Groups.findById(id).catch((error) => {
+      console.log('id: ' + id)
       console.log('Error while connecting to the DB', error)
     })
 

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import '../Dasboard/EnrolledGroups.css'
+import { Link as RouterLink } from "react-router-dom";
+import "../Dasboard/EnrolledGroups.css";
+import { Link } from "@mui/material";
 
-const DEFAULT_GROUP_IMAGE: string = '../../src/assets/rocket.jpg'
+const DEFAULT_GROUP_IMAGE: string = "../../src/assets/rocket.jpg";
 
 interface Group {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   image: string;
@@ -31,9 +31,6 @@ const EnrolledGroups: React.FC<EnrolledGroupsProp> = ({ userId }) => {
           `http://localhost:3011/api/v1/groups/findByMember/${userId}`
         );
         setEnrolledGroups(response.data.groups);
-        console.log(
-          "EnrolledGroups: " + JSON.stringify(response.data, null, 2)
-        );
       } catch (error) {
         console.error("Error fetching enrolled groups:", error);
       }
@@ -48,31 +45,37 @@ const EnrolledGroups: React.FC<EnrolledGroupsProp> = ({ userId }) => {
 
   return (
     <>
-    <div>
-      <div className="Grid">
-        {enrolledGroups.map((group) => (
-          <Card key={group.id} sx={{ maxWidth: 350, m: 5 }}>
-            <CardMedia
-              component="img"
-              alt={group.name}
-              height="140"
-              image={group.image || DEFAULT_GROUP_IMAGE }
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {group.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {group.description}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Enrolle</Button>
-            </CardActions>
-          </Card>
-        ))}
+      <div>
+        <div className="Grid">
+          {enrolledGroups.map((group) => (
+            <Card key={group._id} sx={{ maxWidth: 350, m: 5 }}>
+              <CardMedia
+                component="img"
+                alt={group.name}
+                height="140"
+                image={group.image || DEFAULT_GROUP_IMAGE}
+              />
+              <CardContent>
+                <RouterLink
+                  to={`http://localhost:5173/groupDetails/${group._id}`}
+                  className="link"
+                >
+                  <Link className="link"
+                  underline="none"
+                  gutterBottom
+                  variant="h6"
+                  component="div">
+                    {group.name}
+                  </Link>
+                </RouterLink>
+                <Typography variant="body2" color="text.secondary">
+                  {group.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };

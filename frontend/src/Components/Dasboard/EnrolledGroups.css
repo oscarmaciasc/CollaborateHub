@@ -3,3 +3,13 @@
     flex-wrap: wrap;
     padding: 2rem;
 }
+
+.link {
+    cursor: pointer;
+    transition: all 0.5s ease;
+    text-decoration: none;
+}
+
+.link:hover {
+    transform: scale(1.02);
+}

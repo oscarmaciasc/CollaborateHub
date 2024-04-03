@@ -1,5 +1,6 @@
 import EnrolledGroups from "./Dasboard/EnrolledGroups";
 import SearchBar from "../Components/SearchBar/SearchBar";
+import AddGroup from "./Dasboard/AddGroup";
 
 function Dashboard() {
 
