@@ -31,13 +31,14 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import GroupLanding from "./GroupLanding/GroupLanding";
+import GroupMessages from "./GroupMessages/GroupMessages";
 
 interface Group {
-    _id: string;
-    name: string;
-    description: string;
-    image: string;
-  }
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+}
 
 const drawerWidth = 240;
 
@@ -91,10 +92,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 interface PersistentDrawerLeftProps {
-    group: Group;
-  }
+  group: Group;
+}
 
-export default function PersistentDrawerLeft({ group }: PersistentDrawerLeftProps) {
+export default function PersistentDrawerLeft({
+  group,
+}: PersistentDrawerLeftProps) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -171,7 +174,6 @@ export default function PersistentDrawerLeft({ group }: PersistentDrawerLeftProp
     </Menu>
   );
 
-  
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -223,7 +225,6 @@ export default function PersistentDrawerLeft({ group }: PersistentDrawerLeftProp
       </MenuItem>
     </Menu>
   );
-
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -329,9 +330,10 @@ export default function PersistentDrawerLeft({ group }: PersistentDrawerLeftProp
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {selectedIconIndex === 0 && <Typography paragraph>{group && <GroupLanding group={group}/>}</Typography>}
 
-        {selectedIconIndex === 1 && <Typography paragraph>Messages</Typography>}
+        {selectedIconIndex === 0 && group && <GroupLanding group={group} />}
+
+        {selectedIconIndex === 1 && <GroupMessages />}
 
         {selectedIconIndex === 2 && <Typography paragraph>Calendar</Typography>}
 

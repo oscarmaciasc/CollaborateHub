@@ -38,7 +38,7 @@ const Member: React.FC<MemberProps> = ({ members }) => {
         });
         setUserProfiles(profiles);
       } catch (error) {
-        console.error("Error fetching enrolled groups:", error);
+        console.error("Error fetching user profiles:", error);
       }
     };
 
