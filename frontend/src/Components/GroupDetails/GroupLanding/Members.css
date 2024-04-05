@@ -1,0 +1,11 @@
+.css-17o22dy-MuiAvatar-root {
+    width: 120px !important;
+    height: 120px !important;
+}
+
+.Card {
+    transition: margin-all 1s;
+}
+
+.Card:hover {
+}
