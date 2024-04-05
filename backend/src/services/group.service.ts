@@ -1,14 +1,16 @@
-import { ObjectId } from 'mongoose'
 import Groups from '../models/group.model'
 import { Group } from '../types/group.type'
 import boom from '@hapi/boom'
-import UserService from './user.service'
+import { UserProfile } from '../types/user.type'
+import Users from '../models/user.model'
+import { ObjectId } from 'mongoose'
 
 class GroupService {
   async create(group: Group, userId: ObjectId) {
 
     const newGroup = await Groups.create({
       ...group,
+      creator: userId,
       user: userId,
       members: [userId],
       image: group.image
@@ -17,10 +19,6 @@ class GroupService {
     })
 
     const existingGroup = await this.findById((newGroup as any)._id)
-    console.log(
-      'Printing extra info: ' +
-        existingGroup.populate([{ path: 'creator', strictPopulate: false }])
-    )
     return existingGroup.populate([{ path: 'creator', strictPopulate: false }])
   }
 
@@ -51,7 +49,7 @@ class GroupService {
 
   async findByMember(userId: string) {
     const groups = await Groups.find({ members: userId }).catch((error) => {
-        console.log('Could not retreive group info', error)
+      console.log('Could not retreive group info', error)
     })
 
     if (!groups) {

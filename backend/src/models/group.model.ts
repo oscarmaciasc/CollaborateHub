@@ -1,6 +1,7 @@
-import {Schema, Model, model, Types} from 'mongoose'
+import {Schema, model} from 'mongoose'
 import {Group, GroupModel} from '../types/group.type'
 import { USER_REFERENCE } from './user.model'
+import { ObjectId } from 'mongoose'
 
 export const GROUP_REFERENCE = 'Group'
 
@@ -17,7 +18,8 @@ const Groups = new Schema<Group, GroupModel>({
         trim: true
     },
     creator: {
-        type: Schema.Types.ObjectId,
+        type: String,
+        ref: USER_REFERENCE,
         required: true
     },
     image: {

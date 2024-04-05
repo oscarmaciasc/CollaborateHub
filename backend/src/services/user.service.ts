@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose'
 import Users from '../models/user.model'
-import { User, UserModel } from '../types/user.type'
+import { User } from '../types/user.type'
 import boom from '@hapi/boom'
 import bcrypt from 'bcrypt'
 
@@ -12,14 +12,14 @@ class UserService {
         email: user.email,
         password: hashedPassword,
         phoneNumber: user.phoneNumber,
-        receiveEmails: user.receiveEmails,
-        profile: {
-          firstName: user.profile.firstName,
-          lastName: user.profile.lastName
-        }
-    }).catch((error) => {
-      console.log('Could not save user', error)
-    })
+        profile: user.profile,
+        receiveEmails: user.receiveEmails
+
+      }).catch((error) => {
+        console.log('Could not save user', error)
+      })
+      
+    console.log('Created user:', newUser);
 
     if(!newUser) {
         throw boom.badRequest('Could not create user')

@@ -31,6 +31,8 @@ router.post(
       const dbUser = await service.findByEmail(user.email)
       const token = jwt.sign(payload, config.jwtSecret, { expiresIn })
 
+      console.log("token: " + token)
+
       // Set the token as an HTTP-only cookie
       res.cookie('token', token, {
         maxAge: expiresIn,

@@ -3,10 +3,26 @@ import { Request } from 'express'
 import { ObjectId } from 'mongoose'
 
 export type User = ToClientUser & {
-  password: string,
-  receiveEmails: Boolean,
+  password: string
+  receiveEmails: Boolean
   created_at?: Date
   updated_at?: Date
+}
+
+
+export type ToClientUser = {
+  id?: string
+  username: string
+  email: string
+  phoneNumber: string
+  profile: UserProfile
+}
+
+export type UserProfile = {
+  firstName: string
+  lastName: string
+  avatar: string
+  bio: string
 }
 
 export type UserRequestType = Request & {
@@ -18,20 +34,6 @@ export type JwtRequestType = Request & {
     sub: ObjectId
   }
 }
-
-export type ToClientUser = {
-  id?: string,
-  username: string,
-  email: string,
-  phoneNumber: string,
-  profile: {
-    firstName: string
-    lastName: string
-    avatar?: string
-    bio?: string
-  }
-}
-
 export type UserMethods = {
   toClient: () => ToClientUser
 }

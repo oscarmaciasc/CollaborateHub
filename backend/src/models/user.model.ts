@@ -42,10 +42,12 @@ const Users = new Schema<User, UserModel, UserMethods>({
         },
         avatar: {
             type: String,
+            required: true,
             trim: true
         },
         bio: {
             type: String,
+            required: true,
             trim: true
         }
     },
