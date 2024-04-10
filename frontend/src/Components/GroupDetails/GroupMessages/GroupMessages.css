@@ -6,9 +6,25 @@
     padding: 0!important;
 }
 
-.full-height {
-    min-height: 100vh;
+.padding {
+   padding: 1rem; 
 }
+
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.general-container {
+    display: flex;
+    flex-direction: row;
+}
+
+hr {
+    border: 1px solid rgb(218, 218, 218);
+    margin-bottom: 1rem;
+}
+
 
 .spaces-container {
     width: 70px;
@@ -16,5 +32,107 @@
     border-left: none;
     display: flex;
     flex-direction: column;
-    text-align: center!important;
+}
+
+.spaces {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 70px;
+}
+
+.spaces button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 1rem;
+}
+
+.messages-container {
+    height: 90.5vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.messages {
+    height: 60vh;
+    overflow-y:scroll;
+}
+
+.message-container {
+    text-align: left;
+    border-radius: 10px;
+}
+
+.message-container h5{
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgb(30, 116, 182);
+}
+
+.message-container p{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.message-container:hover {
+    background-color: rgb(234, 238, 240);
+}
+
+.message-bar {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-area-wrapper {
+    width: 60%;
+}
+
+.text-area-wrapper textarea {
+    outline: none;
+    resize: none;
+    border: none;
+    width: 100%;
+}
+
+.flex-icons button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    margin-right: 2rem;
+}
+
+.friends-container {
+    width: calc(20% - 70px);
+    padding: 1rem;
+}
+
+.friend-container {
+    height: 70px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.friend-container:hover {
+    background-color: rgb(234, 238, 240);
+}
+
+button {
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.2);
+    color: rgb(98, 98, 98)
 }
