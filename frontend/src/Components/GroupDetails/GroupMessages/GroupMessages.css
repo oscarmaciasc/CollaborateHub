@@ -128,11 +128,20 @@ hr {
     background-color: rgb(234, 238, 240);
 }
 
-button {
+.flex-icons button {
     transition: transform 0.3s ease;
 }
 
-button:hover {
+.flex-icons button:hover {
+    transform: scale(1.2);
+    color: rgb(98, 98, 98)
+}
+
+.spaces button {
+    transition: transform 0.3s ease;
+}
+
+.spaces button:hover {
     transform: scale(1.2);
     color: rgb(98, 98, 98)
 }

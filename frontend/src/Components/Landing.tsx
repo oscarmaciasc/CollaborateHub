@@ -1,7 +1,11 @@
+import Cover from "./landing/Cover";
+import Discover from "./landing/Discover";
+
 function Landing() {
     return (
       <>
-        <p>Landing</p>
+        <Cover />
+        <Discover />
       </>
     );
   }

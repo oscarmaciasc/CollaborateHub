@@ -1,0 +1,66 @@
+:root {
+    --neon-blue: #1F51FF;
+}
+
+.nav {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 60vw;
+  display: flex;
+  justify-content: left;
+  margin: 2rem;
+}
+
+.nav-links {
+  width: 40vw;
+  display: flex;
+  justify-content: right;
+  margin: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  margin: 1rem;
+  transition: all 0.5s ease;
+}
+
+.nav-links a:hover {
+  color: var(--neon-blue);
+  transform: scale(1.1);
+}
+
+.Cover {
+  height: 90vh;
+  position: relative;
+}
+
+.question-one {
+  position: absolute;
+  left: 6%;
+  top: 20%;
+  transition: all 0.5s ease;
+}
+
+.question-one:hover {
+  color: var(--neon-blue);
+  transform: scale(1.05);
+
+}
+
+.question-two {
+  position: absolute;
+  right: 6%;
+  top: 80%;
+  transition: all 0.5s ease;
+}
+
+.question-two:hover {
+  color: var(--neon-blue);
+  transform: scale(1.05);
+}
