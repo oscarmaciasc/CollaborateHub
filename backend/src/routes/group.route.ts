@@ -2,7 +2,7 @@ import express from 'express'
 import passport from 'passport'
 import { Group } from '../types/group.type'
 import GroupService from '../services/group.service'
-import {JwtRequestType} from '../types/user.type'
+import { JwtRequestType } from '../types/user.type'
 
 const router = express.Router()
 const service = new GroupService()
@@ -27,6 +27,15 @@ router.get('/', async (req, res, next) => {
     const group = await service.findByName(name as string)
 
     res.status(200).json({ group })
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/findAllGroups', async (req, res, next) => {
+  try {
+    const groups = await service.findAll() // Fetch all groups from the database
+    res.json({ groups })
   } catch (error) {
     next(error)
   }

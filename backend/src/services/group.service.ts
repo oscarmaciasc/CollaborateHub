@@ -22,6 +22,16 @@ class GroupService {
     return existingGroup.populate([{ path: 'creator', strictPopulate: false }])
   }
 
+  async findAll() {
+    try {
+      const groups = await Groups.find();
+      return groups;
+    } catch (error) {
+      console.error('Error while connecting to the DB', error);
+      throw new Error('Error fetching all groups');
+    }
+  }
+
   async findById(id: string) {
     const group = await Groups.findById(id).catch((error) => {
       console.log('id: ' + id)
